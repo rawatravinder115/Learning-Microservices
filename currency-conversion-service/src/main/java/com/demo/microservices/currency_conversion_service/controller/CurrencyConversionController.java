@@ -23,7 +23,7 @@ public class CurrencyConversionController {
     @Autowired
     private CurrencyCoversionServiceProxy proxy;
 
-    @GetMapping("/currecny-converison/from/{from}/to/{to}/quantity/{quantity}")
+    @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversionBean retriveCurrecyExchange(@PathVariable("from") String from , @PathVariable("to") String to, @PathVariable("quantity")BigDecimal quantity){
         int port = Integer.parseInt(Objects.requireNonNull(environment.getProperty("server.port")));
 
@@ -36,7 +36,7 @@ public class CurrencyConversionController {
         return new CurrencyConversionBean(response.getId(),response.getFrom(),response.getTo(),response.getConversionMultiple(),quantity,quantity.multiply(response.getConversionMultiple()),port);
     }
 
-    @GetMapping("/currecny-converison-feign/from/{from}/to/{to}/quantity/{quantity}")
+    @GetMapping("/currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversionBean retriveCurrecyExchangeFeign(@PathVariable("from") String from , @PathVariable("to") String to, @PathVariable("quantity")BigDecimal quantity){
         int port = Integer.parseInt(Objects.requireNonNull(environment.getProperty("server.port")));
         CurrencyConversionBean response = proxy.retriveExchangeValue(from,to);
